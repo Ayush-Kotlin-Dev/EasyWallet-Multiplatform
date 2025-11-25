@@ -1,267 +1,267 @@
-# EasyWallet - 多平台去中心化钱包
+# EasyWallet - Multiplatform Decentralized Wallet
 
 [![Github Release](https://github.com/BreakZero/EasyWallet-Multiplatform/actions/workflows/Release.yml/badge.svg)](https://github.com/BreakZero/EasyWallet-Multiplatform/actions/workflows/Release.yml)
 [![Check Code Style](https://github.com/BreakZero/EasyWallet-Multiplatform/actions/workflows/CheckCodeStyle.yml/badge.svg)](https://github.com/BreakZero/EasyWallet-Multiplatform/actions/workflows/CheckCodeStyle.yml)
 
-## 项目简介
+## Project Overview
 
-EasyWallet是一个基于Kotlin Multiplatform开发的去中心化钱包应用，支持Android和iOS平台。项目采用Clean Architecture架构设计，所有钱包相关数据都本地化存储，使用用户自定义RPC节点确保更高的可信度和隐私性。
+EasyWallet is a decentralized wallet application built with Kotlin Multiplatform, supporting both Android and iOS platforms. The project follows Clean Architecture design principles, with all wallet-related data stored locally. It uses user-defined RPC nodes to ensure higher trustworthiness and privacy.
 
-### 核心特性
+### Core Features
 
-- 🔐 **助记词管理**: 支持助记词导入和生成方式创建钱包
-- 🌐 **多链支持**: 目前支持Ethereum链，架构设计支持多链扩展
-- 📱 **跨平台**: 基于Kotlin Multiplatform，支持Android和iOS
-- 🔒 **本地化存储**: 所有敏感数据本地存储，保护用户隐私
-- 🎨 **现代UI**: 使用Jetpack Compose (Android) 和 SwiftUI (iOS)
-- 📊 **行情数据**: 集成CoinGecko API查看加密货币行情
-- 📰 **资讯浏览**: 接入BlockChair接口提供区块链资讯
+- 🔐 **Mnemonic Management**: Support for wallet creation via mnemonic import or generation
+- 🌐 **Multi-chain Support**: Currently supports Ethereum chain, with architecture designed for multi-chain expansion
+- 📱 **Cross-platform**: Built on Kotlin Multiplatform, supporting Android and iOS
+- 🔒 **Local Storage**: All sensitive data is stored locally to protect user privacy
+- 🎨 **Modern UI**: Using Jetpack Compose (Android) and SwiftUI (iOS)
+- 📊 **Market Data**: Integrated CoinGecko API for cryptocurrency market information
+- 📰 **News Browsing**: BlockChair API integration for blockchain news
 
-## 项目架构
+## Project Architecture
 
-### 整体架构
+### Overall Architecture
 
-项目采用Clean Architecture + MVI/MVVM架构模式，分为以下主要模块：
+The project adopts Clean Architecture + MVI/MVVM architectural pattern, divided into the following main modules:
 
 ```
 EasyWallet-Multiplatform/
-├── composeApp/              # Android应用主模块
-├── iosApp/                  # iOS应用主模块
-├── platform/                # 共享业务逻辑层
-│   ├── model/              # 数据模型层
-│   ├── domain/             # 业务逻辑层
-│   ├── data/               # 数据访问层
-│   ├── network/            # 网络请求层
-│   ├── database/           # 本地数据库层
-│   └── datastore/          # 数据存储层
-├── build-logic/            # 构建逻辑配置
-└── configs/                # 配置文件
+├── composeApp/              # Android application main module
+├── iosApp/                  # iOS application main module
+├── platform/                # Shared business logic layer
+│   ├── model/              # Data model layer
+│   ├── domain/             # Business logic layer
+│   ├── data/               # Data access layer
+│   ├── network/            # Network request layer
+│   ├── database/           # Local database layer
+│   └── datastore/          # Data storage layer
+├── build-logic/            # Build logic configuration
+└── configs/                # Configuration files
 ```
 
-### 架构设计图
+### Architecture Diagram
 
 ![architecture.png](screenshots%2Farchitecture.png)
 
-### 模块详细说明
+### Detailed Module Description
 
-#### 1. Platform层 (共享业务逻辑)
+#### 1. Platform Layer (Shared Business Logic)
 
-**model模块**
-- 定义所有数据模型和实体类
-- 包含网络请求、数据库、UI展示等各层的数据模型
-- 使用Kotlinx Serialization进行序列化
+**model module**
+- Defines all data models and entity classes
+- Contains data models for network requests, database, UI presentation, and other layers
+- Uses Kotlinx Serialization for serialization
 
-**domain模块**
-- 包含业务逻辑和用例(Use Cases)
-- 定义Repository接口
-- 处理业务规则和数据转换
+**domain module**
+- Contains business logic and Use Cases
+- Defines Repository interfaces
+- Handles business rules and data transformations
 
-**data模块**
-- 实现Repository接口
-- 协调网络层、数据库层、数据存储层
-- 处理数据源切换和缓存策略
+**data module**
+- Implements Repository interfaces
+- Coordinates network layer, database layer, and data storage layer
+- Handles data source switching and caching strategies
 
-**network模块**
-- 使用Ktor进行网络请求
-- 支持Android (OkHttp) 和 iOS (Darwin) 平台
-- 集成API密钥管理(BuildKonfig)
+**network module**
+- Uses Ktor for network requests
+- Supports Android (OkHttp) and iOS (Darwin) platforms
+- Integrates API key management (BuildKonfig)
 
-**database模块**
-- 使用SQLDelight进行本地数据库管理
-- 支持多链数据存储
-- 提供协程扩展支持
+**database module**
+- Uses SQLDelight for local database management
+- Supports multi-chain data storage
+- Provides coroutine extension support
 
-**datastore模块**
-- 使用DataStore进行轻量级数据存储
-- 存储用户偏好设置和应用配置
+**datastore module**
+- Uses DataStore for lightweight data storage
+- Stores user preferences and application configuration
 
-## 技术栈与第三方库
+## Tech Stack & Third-party Libraries
 
-### 核心框架
+### Core Frameworks
 
-| 技术                   | 版本     | 用途           |
-|----------------------|--------|--------------|
-| Kotlin Multiplatform | 2.2.10 | 跨平台开发框架      |
-| Jetpack Compose      | 1.8.2  | Android UI框架 |
-| SwiftUI              | -      | iOS UI框架     |
-| Kotlin Coroutines    | 1.10.2 | 异步编程         |
+| Technology           | Version | Purpose                     |
+|---------------------|---------|------------------------------|
+| Kotlin Multiplatform | 2.2.10  | Cross-platform development framework |
+| Jetpack Compose      | 1.8.2   | Android UI framework         |
+| SwiftUI              | -       | iOS UI framework             |
+| Kotlin Coroutines    | 1.10.2  | Asynchronous programming     |
 
-### 网络与数据
+### Network & Data
 
-| 库名                    | 版本            | 用途      |
-|-----------------------|---------------|---------|
-| Ktor                  | 3.3.0         | HTTP客户端 |
-| Kotlinx Serialization | 1.9.0         | JSON序列化 |
-| SQLDelight            | 2.1.0         | 本地数据库   |
-| DataStore             | 1.1.7         | 轻量级数据存储 |
-| Paging3               | 3.3.0-alpha02 | 分页加载    |
+| Library               | Version       | Purpose              |
+|-----------------------|---------------|----------------------|
+| Ktor                  | 3.3.0         | HTTP client          |
+| Kotlinx Serialization | 1.9.0         | JSON serialization   |
+| SQLDelight            | 2.1.0         | Local database       |
+| DataStore             | 1.1.7         | Lightweight data storage |
+| Paging3               | 3.3.0-alpha02 | Pagination loading   |
 
-### 依赖注入与架构
+### Dependency Injection & Architecture
 
-| 库名                  | 版本         | 用途     |
-|---------------------|------------|--------|
-| Koin                | 4.1.1      | 依赖注入框架 |
-| Navigation Compose  | 2.9.0-rc02 | 页面导航   |
-| Lifecycle ViewModel | 2.9.3      | 生命周期管理 |
+| Library             | Version    | Purpose                  |
+|---------------------|------------|--------------------------|
+| Koin                | 4.1.1      | Dependency injection framework |
+| Navigation Compose  | 2.9.0-rc02 | Page navigation          |
+| Lifecycle ViewModel | 2.9.3      | Lifecycle management     |
 
-### UI与图像
+### UI & Images
 
-| 库名     | 版本     | 用途       |
-|--------|--------|----------|
-| Coil   | 3.3.0  | 图像加载     |
-| Vico   | 2.1.3  | 图表绘制     |
-| QR Kit | 3.1.3  | 二维码生成/扫描 |
-| Haze   | 1.6.10 | 视觉效果     |
+| Library | Version | Purpose              |
+|---------|---------|----------------------|
+| Coil    | 3.3.0   | Image loading        |
+| Vico    | 2.1.3   | Chart rendering      |
+| QR Kit  | 3.1.3   | QR code generation/scanning |
+| Haze    | 1.6.10  | Visual effects       |
 
-### 区块链与加密
+### Blockchain & Cryptography
 
-| 库名          | 版本     | 用途        |
-|-------------|--------|-----------|
-| Wallet Core | 4.3.9  | 区块链钱包核心功能 |
-| BigNum      | 0.3.10 | 大数运算      |
+| Library     | Version | Purpose                    |
+|-------------|---------|----------------------------|
+| Wallet Core | 4.3.9   | Blockchain wallet core functionality |
+| BigNum      | 0.3.10  | Big number operations      |
 
-### 开发工具
+### Development Tools
 
-| 工具          | 版本     | 用途     |
-|-------------|--------|--------|
-| Ktlint      | 13.1.0 | 代码格式化  |
-| BuildKonfig | 0.17.1 | 构建配置生成 |
-| Kermit      | 2.0.8  | 日志记录   |
+| Tool        | Version | Purpose               |
+|-------------|---------|----------------------|
+| Ktlint      | 13.1.0  | Code formatting       |
+| BuildKonfig | 0.17.1  | Build configuration generation |
+| Kermit      | 2.0.8   | Logging               |
 
-## 项目结构详解
+## Project Structure Details
 
-### 目录结构
+### Directory Structure
 
 ```
 EasyWallet-Multiplatform/
-├── .github/                 # GitHub Actions配置
-├── .githooks/              # Git钩子脚本
-├── .gradle/                # Gradle缓存
-├── .idea/                  # IDE配置
-├── build-logic/            # 自定义构建逻辑
-│   ├── convention/         # Gradle约定插件
-│   └── building.versions.toml  # 版本管理
-├── composeApp/             # Android应用
+├── .github/                 # GitHub Actions configuration
+├── .githooks/              # Git hook scripts
+├── .gradle/                # Gradle cache
+├── .idea/                  # IDE configuration
+├── build-logic/            # Custom build logic
+│   ├── convention/         # Gradle convention plugins
+│   └── building.versions.toml  # Version management
+├── composeApp/             # Android application
 │   ├── src/
-│   │   ├── androidMain/    # Android特定代码
-│   │   ├── commonMain/     # 共享代码
-│   │   └── iosMain/        # iOS特定代码
+│   │   ├── androidMain/    # Android-specific code
+│   │   ├── commonMain/     # Shared code
+│   │   └── iosMain/        # iOS-specific code
 │   └── build.gradle.kts
-├── iosApp/                 # iOS应用
-│   ├── iosApp/            # iOS项目文件
-│   ├── Podfile            # CocoaPods依赖
-│   └── iosApp.xcodeproj/  # Xcode项目
-├── platform/              # 共享业务逻辑
-│   ├── model/             # 数据模型
-│   ├── domain/            # 业务逻辑
-│   ├── data/              # 数据访问
-│   ├── network/           # 网络请求
-│   ├── database/          # 数据库
-│   └── datastore/         # 数据存储
-├── configs/               # 配置文件
-│   ├── package_read.properties  # GitHub包认证
-│   └── apikeys.properties      # API密钥配置
-├── screenshots/           # 应用截图
-├── scripts/               # 构建脚本
-├── keystore/              # 签名密钥
-├── build.gradle.kts       # 根构建脚本
-├── settings.gradle.kts    # 项目设置
-├── gradle.properties      # Gradle属性
-└── libs.versions.toml     # 依赖版本管理
+├── iosApp/                 # iOS application
+│   ├── iosApp/            # iOS project files
+│   ├── Podfile            # CocoaPods dependencies
+│   └── iosApp.xcodeproj/  # Xcode project
+├── platform/              # Shared business logic
+│   ├── model/             # Data models
+│   ├── domain/            # Business logic
+│   ├── data/              # Data access
+│   ├── network/           # Network requests
+│   ├── database/          # Database
+│   └── datastore/         # Data storage
+├── configs/               # Configuration files
+│   ├── package_read.properties  # GitHub package authentication
+│   └── apikeys.properties      # API key configuration
+├── screenshots/           # Application screenshots
+├── scripts/               # Build scripts
+├── keystore/              # Signing keys
+├── build.gradle.kts       # Root build script
+├── settings.gradle.kts    # Project settings
+├── gradle.properties      # Gradle properties
+└── libs.versions.toml     # Dependency version management
 ```
 
-### 关键配置文件
+### Key Configuration Files
 
-#### 1. 依赖版本管理 (libs.versions.toml)
-统一管理所有第三方库的版本，确保依赖一致性。
+#### 1. Dependency Version Management (libs.versions.toml)
+Centrally manages all third-party library versions to ensure dependency consistency.
 
-#### 2. 构建逻辑 (build-logic/)
-自定义Gradle插件，简化各模块的构建配置。
+#### 2. Build Logic (build-logic/)
+Custom Gradle plugins to simplify build configuration for each module.
 
-#### 3. API密钥配置
-- `configs/package_read.properties`: GitHub包认证
-- `configs/apikeys.properties`: 第三方API密钥
+#### 3. API Key Configuration
+- `configs/package_read.properties`: GitHub package authentication
+- `configs/apikeys.properties`: Third-party API keys
 
-## 开发环境配置
+## Development Environment Setup
 
-### 前置要求
+### Prerequisites
 
 - Android Studio Hedgehog 2023.1.1+
 - Xcode 15.0+
 - Kotlin 2.2.10+
 - Gradle 8.12.2+
 
-### 配置步骤
+### Setup Steps
 
-1. **克隆项目**
+1. **Clone the project**
 ```bash
 git clone https://github.com/BreakZero/EasyWallet-KMP.git
 cd EasyWallet-Multiplatform
 ```
 
-2. **配置GitHub认证**
-在`configs/`目录下创建`package_read.properties`文件：
+2. **Configure GitHub authentication**
+Create a `package_read.properties` file in the `configs/` directory:
 ```properties
 gpr.name=Your Github Name
 gpr.key=Your Github token
 ```
 
-3. **配置API密钥**
-在`configs/`目录下创建`apikeys.properties`文件：
+3. **Configure API keys**
+Create an `apikeys.properties` file in the `configs/` directory:
 ```properties
 etherscan=YOUR_ETHERSCAN_API_KEY
 coingecko=YOUR_COINGECKO_API_KEY
 opensea=YOUR_OPENSEA_API_KEY
 ```
 
-4. **生成构建配置**
+4. **Generate build configuration**
 ```bash
 ./gradlew -p platform generateBuildKonfig
 ```
 
-5. **构建项目**
+5. **Build the project**
 ```bash
 # Android
 ./gradlew :composeApp:assembleDebug
 
 # iOS
 cd iosApp && pod install
-# 然后在Xcode中打开iosApp.xcworkspace
+# Then open iosApp.xcworkspace in Xcode
 ```
 
-## 功能模块
+## Feature Modules
 
-### 已实现功能
+### Implemented Features
 
-- ✅ 助记词导入/生成钱包
-- ✅ Ethereum链资产管理
-- ✅ 本地数据存储
-- ✅ 多链数据库架构
-- ✅ 现代UI界面
-- ✅ 依赖注入架构
+- ✅ Mnemonic import/generate wallet
+- ✅ Ethereum chain asset management
+- ✅ Local data storage
+- ✅ Multi-chain database architecture
+- ✅ Modern UI interface
+- ✅ Dependency injection architecture
 
-### 开发中/计划的功能
+### In Development/Planned Features
 
-- 🚧 iOS端完整功能
-- 🚧 更多区块链支持
-- 🚧 交易记录查看
-- 🚧 自定义Token添加
-- 🚧 高级安全功能
+- 🚧 Full iOS functionality
+- 🚧 More blockchain support
+- 🚧 Transaction history viewing
+- 🚧 Custom token addition
+- 🚧 Advanced security features
 
-## 贡献指南
+## Contributing Guide
 
-1. Fork项目
-2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 创建Pull Request
+1. Fork the project
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Create a Pull Request
 
-## 致谢
+## Acknowledgements
 
-- [Trust Wallet Core](https://github.com/trustwallet/wallet-core) - 区块链钱包核心功能
-- [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html) - 跨平台开发框架
-- [Jetpack Compose](https://developer.android.com/jetpack/compose) - 现代Android UI框架
-- [CoinGecko](https://www.coingecko.com/) - 加密货币行情数据
-- [BlockChair](https://blockchair.com/) - 区块链数据服务
+- [Trust Wallet Core](https://github.com/trustwallet/wallet-core) - Blockchain wallet core functionality
+- [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html) - Cross-platform development framework
+- [Jetpack Compose](https://developer.android.com/jetpack/compose) - Modern Android UI framework
+- [CoinGecko](https://www.coingecko.com/) - Cryptocurrency market data
+- [BlockChair](https://blockchair.com/) - Blockchain data service
 
 ---
