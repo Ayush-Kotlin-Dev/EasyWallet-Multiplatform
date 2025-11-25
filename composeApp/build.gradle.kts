@@ -103,7 +103,7 @@ android {
   namespace = "org.easy.wallet"
 
   defaultConfig {
-    applicationId = "org.easy.wallet"
+    applicationId = "com.ayush.jrnwallet"
     versionCode = 1
     versionName = "1.0"
     ndk {

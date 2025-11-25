@@ -11,7 +11,6 @@ import org.easy.wallet.feature.account.navigation.AccountBaseRoute
 import org.easy.wallet.feature.account.navigation.AccountRoute
 import org.easy.wallet.feature.assets.navigation.AssetsBaseRoute
 import org.easy.wallet.feature.assets.navigation.AssetsRoute
-import org.easy.wallet.feature.news.navigation.NewsRoute
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import kotlin.reflect.KClass
@@ -29,12 +28,6 @@ enum class TopLevelDestination(
     titleTextId = Res.string.tab_assets,
     route = AssetsRoute::class,
     baseRoute = AssetsBaseRoute::class
-  ),
-  News(
-    selectedIcon = Res.drawable.ic_tab_news,
-    unselectedIcon = Res.drawable.ic_tab_news,
-    titleTextId = Res.string.tab_news,
-    route = NewsRoute::class
   ),
 
 //  DApps(
